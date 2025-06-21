@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineer Portfolio | Java | Spring Boot | Azure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#3b82f6',
+                            dark: '#1e40af'
+                        },
+                        secondary: {
+                            light: '#10b981',
+                            dark: '#047857'
+                        },
+                        accent: {
+                            light: '#f59e0b',
+                            dark: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+        
+        body {
+            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #3b82f6, #10b981);
+        }
+        
+        .dark .gradient-text {
+            background-image: linear-gradient(90deg, #60a5fa, #34d399);
+        }
+        
+        .tech-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-card {
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+        }
+        
+        .dark .timeline-item::before {
+            background-color: #60a5fa;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 16px;
+            width: 2px;
+            height: calc(100% - 16px);
+            background-color: #e5e7eb;
+        }
+        
+        .dark .timeline-item::after {
+            background-color: #4b5563;
+        }
+        
+        .last-timeline-item::after {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold">
+                <span class="gradient-text">Portfolio</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-primary-light dark:hover:text-primary-dark transition">About</a>
+                <a href="#skills" class="hover:text-primary-light dark:hover:text-primary-dark transition">Skills</a>
+                <a href="#projects" class="hover:text-primary-light dark:hover:text-primary-dark transition">Projects</a>
+                <a href="#experience" class="hover:text-primary-light dark:hover:text-primary-dark transition">Experience</a>
+                <a href="#contact" class="hover:text-primary-light dark:hover:text-primary-dark transition">Contact</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </button>
+                <button class="md:hidden p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition" id="mobile-menu-button">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 px-4 py-2 shadow-lg">
+            <div class="flex flex-col space-y-3">
+                <a href="#about" class="py-2 hover:text-primary-light dark:hover:text-primary-dark transition">About</a>
+                <a href="#skills" class="py-2 hover:text-primary-light dark:hover:text-primary-dark transition">Skills</a>
+                <a href="#projects" class="py-2 hover:text-primary-light dark:hover:text-primary-dark transition">Projects</a>
+                <a href="#experience" class="py-2 hover:text-primary-light dark:hover:text-primary-dark transition">Experience</a>
+                <a href="#contact" class="py-2 hover:text-primary-light dark:hover:text-primary-dark transition">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Hero Section -->
+        <section class="flex flex-col md:flex-row items-center justify-between gap-12 mb-24">
+            <div class="md:w-1/2">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                    Hi, I'm <span class="gradient-text">John Doe</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-gray-600 dark:text-gray-300">
+                    Software Engineer | Cloud Specialist
+                </h2>
+                <p class="text-lg mb-8 text-gray-600 dark:text-gray-300">
+                    I build scalable, efficient backend systems with Java, Spring Boot, and Azure cloud technologies. 
+                    With over 2.5 years of experience in microservices architecture and cloud-native development.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#contact" class="px-6 py-3 bg-primary-light dark:bg-primary-dark text-white rounded-lg font-medium hover:opacity-90 transition">
+                        Contact Me
+                    </a>
+                    <a href="#" class="px-6 py-3 border border-primary-light dark:border-primary-dark text-primary-light dark:text-primary-dark rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                        Download CV
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80">
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark rounded-full opacity-20 blur-xl"></div>
+                    <div class="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+                             alt="Profile" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="mb-24">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">About Me</span>
+            </h2>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Who I Am</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            I'm a passionate software engineer specializing in backend development with Java and Spring Boot. 
+                            My expertise lies in building scalable microservices, implementing CI/CD pipelines, and deploying 
+                            applications on cloud platforms like Azure.
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">
+                            I hold a Microsoft Certified: Azure Fundamentals certification and have hands-on experience with 
+                            containerization using Docker and Kubernetes, as well as event-driven architectures with Kafka.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-2 text-primary-light dark:text-primary-dark"></i>
+                                <span>San Francisco, CA</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope mr-2 text-primary-light dark:text-primary-dark"></i>
+                                <span>john.doe@example.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone mr-2 text-primary-light dark:text-primary-dark"></i>
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">My Technical Journey</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="mr-4 mt-1">
+                                    <div class="w-10 h-10 rounded-full bg-primary-light dark:bg-primary-dark flex items-center justify-center text-white">
+                                        <i class="fas fa-code"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Backend Development</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                        Specialized in Java, Spring Boot, and microservices architecture for building robust backend systems.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mr-4 mt-1">
+                                    <div class="w-10 h-10 rounded-full bg-secondary-light dark:bg-secondary-dark flex items-center justify-center text-white">
+                                        <i class="fas fa-cloud"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Cloud Computing</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                        Microsoft Azure certified with experience in serverless functions, containerization, and cloud deployments.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mr-4 mt-1">
+                                    <div class="w-10 h-10 rounded-full bg-accent-light dark:bg-accent-dark flex items-center justify-center text-white">
+                                        <i class="fas fa-project-diagram"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">DevOps Practices</h4>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                        Implemented CI/CD pipelines, infrastructure as code, and monitoring solutions for production systems.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="mb-24">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">Technical Skills</span>
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Programming Languages -->
+                <div class="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                        <i class="fab fa-java text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Java</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Advanced proficiency with Java 8+ features</p>
+                </div>
+                
+                <!-- Frameworks -->
+                <div class="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                        <i class="fas fa-leaf text-green-600 dark:text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Spring Boot</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Microservices, REST APIs, Spring Security</p>
+                </div>
+                
+                <!-- Cloud -->
+                <div class="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                        <i class="fab fa-microsoft text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Azure</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Serverless Functions, AKS, Azure DevOps</p>
+                </div>
+                
+                <!-- DevOps -->
+                <div class="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                        <i class="fab fa-docker text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Docker</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Containerization, Docker Compose</p>
+                </div>
+                
+                <!-- DevOps -->
+                <div class="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                        <i class="fas fa-ship text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Kubernetes</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Cluster management, Helm charts</p>
+                </div>
+                
+                <!-- Build Tools -->
+                <div class="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                        <i class="fas fa-cubes text-gray-600 dark:text-gray-300 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Gradle</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Build automation, dependency management</p>
+                </div>
+                
+                <!-- Messaging -->
+                <div class="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
+                        <i class="fas fa-exchange-alt text-purple-600 dark:text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Kafka</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">Event streaming, message queues</p>
+                </div>
+                
+                <!-- CI/CD -->
+                <div class="tech-card bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg">
+                    <div class="w-12 h-12 mb-4 rounded-full bg-red-100 dark:bg-red-900 flex items-center justify-center">
+                        <i class="fas fa-sync-alt text-red-600 dark:text-red-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">CI/CD</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300">GitHub Actions, Azure Pipelines</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="mb-24">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">Featured Projects</span>
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-r from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark flex items-center justify-center">
+                        <i class="fas fa-server text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">E-Commerce Microservices</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            A scalable e-commerce platform built with Spring Boot microservices, using Kafka for event-driven architecture and deployed on Azure Kubernetes Service.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">Java</span>
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full">Spring Boot</span>
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded-full">Kafka</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">Azure</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-primary-light dark:text-primary-dark hover:underline">View Code</a>
+                            <a href="#" class="text-primary-light dark:text-primary-dark hover:underline">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-r from-secondary-light to-accent-light dark:from-secondary-dark dark:to-accent-dark flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Real-time Analytics Dashboard</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            A serverless analytics solution using Azure Functions to process streaming data with Kafka and visualize insights in real-time.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">Azure</span>
+                            <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 text-xs rounded-full">Serverless</span>
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded-full">Kafka</span>
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full">React</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-primary-light dark:text-primary-dark hover:underline">View Code</a>
+                            <a href="#" class="text-primary-light dark:text-primary-dark hover:underline">Case Study</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-r from-accent-light to-primary-light dark:from-accent-dark dark:to-primary-dark flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">CI/CD Automation Pipeline</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Designed and implemented a complete CI/CD pipeline with GitHub Actions, Docker, and Kubernetes for automated deployments.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs rounded-full">GitHub Actions</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">Docker</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">Kubernetes</span>
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full">Terraform</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-primary-light dark:text-primary-dark hover:underline">View Code</a>
+                            <a href="#" class="text-primary-light dark:text-primary-dark hover:underline">Documentation</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                    <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                        <i class="fas fa-lock text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Authentication Service</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            A secure JWT-based authentication microservice with OAuth2 integration, rate limiting, and monitoring.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full">Spring Security</span>
+                            <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">JWT</span>
+                            <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 text-xs rounded-full">OAuth2</span>
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded-full">Redis</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-primary-light dark:text-primary-dark hover:underline">View Code</a>
+                            <a href="#" class="text-primary-light dark:text-primary-dark hover:underline">API Docs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="mb-24">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">Professional Experience</span>
+            </h2>
+            <div class="relative">
+                <!-- Timeline -->
+                <div class="space-y-8 pl-8">
+                    <!-- Experience 1 -->
+                    <div class="relative timeline-item">
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                <h3 class="text-xl font-bold">Senior Software Engineer</h3>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Jan 2022 - Present</span>
+                            </div>
+                            <h4 class="text-lg font-semibold text-primary-light dark:text-primary-dark mb-2">TechSolutions Inc.</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                                <li>Led the migration of monolithic application to microservices architecture using Spring Boot and Docker</li>
+                                <li>Implemented CI/CD pipelines with Azure DevOps, reducing deployment time by 70%</li>
+                                <li>Designed and deployed event-driven systems using Kafka for real-time data processing</li>
+                                <li>Optimized Kubernetes cluster configurations, reducing cloud costs by 30%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 2 -->
+                    <div class="relative timeline-item">
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                <h3 class="text-xl font-bold">Software Engineer</h3>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Jun 2020 - Dec 2021</span>
+                            </div>
+                            <h4 class="text-lg font-semibold text-primary-light dark:text-primary-dark mb-2">CloudNative Systems</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                                <li>Developed RESTful APIs with Spring Boot and Gradle for financial services applications</li>
+                                <li>Created Azure Serverless Functions for processing high-volume transaction data</li>
+                                <li>Implemented monitoring solutions with Prometheus and Grafana for production systems</li>
+                                <li>Mentored junior developers in best practices for Java and cloud development</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Experience 3 -->
+                    <div class="relative timeline-item last-timeline-item">
+                        <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
+                                <h3 class="text-xl font-bold">Junior Developer</h3>
+                                <span class="text-sm text-gray-500 dark:text-gray-400">Jan 2019 - May 2020</span>
+                            </div>
+                            <h4 class="text-lg font-semibold text-primary-light dark:text-primary-dark mb-2">Digital Innovations</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
+                                <li>Contributed to backend development of enterprise Java applications</li>
+                                <li>Assisted in containerizing applications with Docker and deploying to cloud environments</li>
+                                <li>Participated in Agile development processes and code reviews</li>
+                                <li>Earned Microsoft Certified: Azure Fundamentals certification</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="mb-24">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">Get In Touch</span>
+            </h2>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                <div class="grid md:grid-cols-2">
+                    <div class="p-8 md:p-12 bg-gradient-to-br from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark text-white">
+                        <h3 class="text-2xl font-bold mb-4">Let's work together</h3>
+                        <p class="mb-8 opacity-90">
+                            I'm currently open to new opportunities and collaborations. Whether you have a project in mind or just want to connect, feel free to reach out.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-envelope mr-4 text-xl"></i>
+                                <span>john.doe@example.com</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-phone mr-4 text-xl"></i>
+                                <span>+1 (555) 123-4567</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-4 text-xl"></i>
+                                <span>San Francisco, CA</span>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition">
+                                <i class="fab fa-dev"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-12">
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-1">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark bg-white dark:bg-gray-700">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-1">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark bg-white dark:bg-gray-700">
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-sm font-medium mb-1">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark bg-white dark:bg-gray-700">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium mb-1">Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark bg-white dark:bg-gray-700"></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-6 py-3 bg-primary-light dark:bg-primary-dark text-white rounded-lg font-medium hover:opacity-90 transition">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-100 dark:bg-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-2xl font-bold">
+                        <span class="gradient-text">Portfolio</span>
+                    </a>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition">About</a>
+                    <a href="#skills" class="text-gray-600 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition">Skills</a>
+                    <a href="#projects" class="text-gray-600 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition">Projects</a>
+                    <a href="#experience" class="text-gray-600 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition">Experience</a>
+                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center text-gray-500 dark:text-gray-400 text-sm">
+                <p>&copy; 2023 John Doe. All rights reserved.</p>
+                <p class="mt-2">Built with passion and <i class="fas fa-heart text-red-500"></i> for technology</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved user preference, if any, on load of the website
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            // Toggle the .dark class on the html element
+            html.classList.toggle('dark');
+            
+            // Update the localStorage with the current theme preference
+            if (html.classList.contains('dark')) {
+                localStorage.setItem('color-theme', 'dark');
+            } else {
+                localStorage.setItem('color-theme', 'light');
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Close mobile menu if open
+                mobileMenu.classList.add('hidden');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
